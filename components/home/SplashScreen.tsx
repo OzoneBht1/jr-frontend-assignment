@@ -6,10 +6,10 @@ export default function SplashScreen() {
       <div className="flex w-1/2 items-center justify-center">
         <div className="flex flex-col gap-6 w-full items-end">
           <Image
-            src="/play.png"
+            src="/download.png"
             alt="music-play-button-logo"
-            width={60}
-            height={60}
+            width={200}
+            height={120}
           />
 
           <h6
