@@ -1,3 +1,4 @@
+import SplashScreen from "@/components/SplashScreen";
 import Head from "next/head";
 
 export default function Home() {
@@ -6,7 +7,7 @@ export default function Home() {
       <Head>
         <title>Music Sansar</title>
       </Head>
-      <p>Hello</p>
+      <SplashScreen />
     </div>
   );
 }
