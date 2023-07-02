@@ -1,6 +1,5 @@
 export const getTrendingAlbums = async (accessToken?: string) => {
   try {
-    console.log("hi mom ");
     const params = new URLSearchParams();
     console.log(accessToken);
     params.append("limit", "20");
