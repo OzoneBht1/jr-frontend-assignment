@@ -70,7 +70,11 @@ export default function Details({ params }: { params: any }) {
         <div className="w-1/2">
           <Image
             loader={({ src }) => src}
-            src={album?.images[0]?.url as string}
+            src={
+              album?.images && album?.images?.length > 0
+                ? (album?.images[0]?.url as string)
+                : ""
+            }
             alt="album"
             className="w-96 h-full"
             width={200}

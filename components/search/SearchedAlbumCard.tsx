@@ -8,12 +8,12 @@ interface ISearchedAlbumProps {
 
 export default function SearchedAlbumCard({ item }: ISearchedAlbumProps) {
   return (
-    <div className="flex gap-3 border-2 w-full border-black-500 h-60 flex-1 relative group hover:opacity-80">
+    <div className="flex flex-col md:flex-row md:h-60 gap-3 border-2 w-full h-40 border-black-500 flex-1 relative group hover:opacity-80">
       <Image
         loader={({ src }) => src}
         src={item.images[0].url}
         alt="album-cover"
-        className="w-60 h-full"
+        className="w-full h-full md:w-60"
         width={64}
         height={64}
       />
@@ -37,7 +37,7 @@ export default function SearchedAlbumCard({ item }: ISearchedAlbumProps) {
         <p>Total Tracks: {item.total_tracks}</p>
         <p>Release Date : {item.release_date}</p>
         <Link href={`/album/${item.id}`}>
-          <button className="bg-green-500 text-white px-4 py-2 rounded-md w-28">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md w-28">
             Visit
           </button>
         </Link>

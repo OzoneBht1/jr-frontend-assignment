@@ -35,7 +35,7 @@ export default function SearchedResults({
     return <div>no data</div>;
   }
   const totalPages = Math.ceil(data?.albums?.total / LIMIT_PER_PAGE);
-  console.log(data?.albums?.total);
+  console.log(data);
 
   const handlePageLeft = () => {
     if (currentPage > 1) {
@@ -52,26 +52,37 @@ export default function SearchedResults({
   return (
     <div className="flex w-full justify-center items-center pt-5">
       <div className="flex flex-col justify-center items-start w-3/5 gap-6">
-        <h6 className="font-semibold text-3xl">
-          {data?.albums?.total} Results Found
+        <h6 className="font-semibold text-lg md:text-3xl">
+          Showing results for "{params.query}"
         </h6>
         <div className="flex flex-col gap-5 justify-center items-center w-full">
+          {data?.albums?.items.length === 0 && (
+            <div className="flex flex-col justify-center items-center w-full border border-slate-500 p-3">
+              <h6 className="font-semibold text-md md:text-3xl">
+                No results for "{params.query}"
+              </h6>
+              <p className="text-sm md:text-lg">
+                Try searching for something else
+              </p>
+            </div>
+          )}
+
           {data?.albums?.items?.map((item) => {
             return <SearchedAlbumCard key={item.id} item={item} />;
           })}
-          <div className="flex items-center gap-2">
-            <AiOutlineLeftCircle
-              onClick={handlePageLeft}
-              className="h-10 w-10"
-            />
-            <p>
-              Page {currentPage} of {totalPages}
-            </p>
-            <AiOutlineRightCircle
-              onClick={handlePageRight}
-              className="h-10 w-10"
-            />
-          </div>
+          {data?.albums?.items.length > 0 && (
+            <div className="flex items-center gap-2">
+              <AiOutlineLeftCircle
+                onClick={handlePageLeft}
+                className="h-10 w-10"
+              />
+              <p>Page {currentPage}</p>
+              <AiOutlineRightCircle
+                onClick={handlePageRight}
+                className="h-10 w-10"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

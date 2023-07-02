@@ -4,6 +4,7 @@ export const getSearchedResults = async (
   limit?: string,
   offset?: string
 ) => {
+  console.log("Calling API with ", accessToken, text, limit, offset);
   const params = new URLSearchParams();
   params.append("q", text);
   params.append("type", "album");
@@ -12,7 +13,7 @@ export const getSearchedResults = async (
   }
   console.log(limit, offset);
   if (offset) {
-    params.append("skip", offset);
+    params.append("offset", offset);
   }
   try {
     const response = await fetch(
