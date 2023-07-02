@@ -10,12 +10,12 @@ export default function AlbumCard({ item, idx }: IAlbumCardProps) {
   console.log(item);
   return (
     <Link href="/album/[id]" as={`/album/${idx}`}>
-      <div className="flex flex-col h-96 w-50 relative group hover:opacity-80">
+      <div className="flex flex-col h-80 relative group hover:opacity-80 w-11/12 md:w-full md:h-96">
         <Image
           loader={({ src }) => src}
           src={item.track.album.images[0].url}
           alt="album-cover"
-          className="w-full h-full"
+          className="h-full w-full"
           width={64}
           height={64}
         />

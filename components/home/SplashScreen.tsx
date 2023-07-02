@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function SplashScreen() {
   return (
-    <div className="flex items-center justify-center pt-10 px-3">
-      <div className="flex w-1/2 items-center justify-center">
+    <div className="flex flex-col items-center justify-center pt-10 md:px-3 md:w-full md:flex md:flex-row">
+      <div className="flex w-1/2 items-center justify-center md:flex-col">
         <div className="flex flex-col gap-6 w-full items-end">
           <Image
             src="/download.png"
@@ -14,7 +14,7 @@ export default function SplashScreen() {
 
           <h6
             style={{ flex: 1, flexWrap: "wrap" }}
-            className="uppercase font-extrabold text-8xl text-right"
+            className="uppercase font-extrabold text-2xl text-right md:text-4xl lg:text-6xl xl:text-8xl"
           >
             Live Your Day With Music
           </h6>
