@@ -12,19 +12,13 @@ import { getSpotifyAccess } from "@/queryFns/getSpotifyAccess";
 import { ReactQueryHydrate } from "@/utils/ReactQueryHydrate";
 
 export default async function Home() {
-  const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(["token"], getSpotifyAccess);
-  const dehydratedState = dehydrate(queryClient);
-
   return (
     <div>
       <Head>
         <title>Music Sansar</title>
       </Head>
       <SplashScreen />
-      <ReactQueryHydrate state={dehydratedState}>
-        <TrendingAlbums />
-      </ReactQueryHydrate>
+      <TrendingAlbums />
     </div>
   );
 }

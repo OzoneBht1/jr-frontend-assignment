@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 const store = configureStore({
   reducer: {
-    spotifyReducer: spotifyReducer,
+    spotify: spotifyReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

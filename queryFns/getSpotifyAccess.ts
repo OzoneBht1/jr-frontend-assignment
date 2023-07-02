@@ -1,8 +1,6 @@
 export const getSpotifyAccess = async () => {
   try {
     const params = new URLSearchParams();
-    console.log(process.env.NEXT_PUBLIC_CLIENT_ID);
-    console.log(process.env.NEXT_PUBLIC_CLIENT_SECRET);
     params.append("grant_type", "client_credentials");
     params.append("client_id", process.env.NEXT_PUBLIC_CLIENT_ID as string);
     params.append(
