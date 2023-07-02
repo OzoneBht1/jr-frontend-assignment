@@ -8,35 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 export default function TrendingAlbums() {
-  const dispatch = useAppDispatch();
-  const { data, isLoading } = useQuery<IToken>({
-    queryKey: ["token"],
-    queryFn: getSpotifyAccess,
-    onSuccess: (data) => {
-      console.log("SUCCESS CALLED");
-      dispatch(spotifyActions.setToken(data));
-    },
-    onError: (error) => {
-      console.log("error");
-    },
-  });
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!data) {
-    return <div>no data</div>;
-  }
-
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(spotifyActions.setToken(data));
-  //   }
-  // }, [data]);
-  const { access_token } = useAppSelector((state) => state.spotifyReducer);
-  // console.log(access_token);
-
+  const { access_token } = useAppSelector((state) => state.spotify);
   return (
     <div>
       <p>hello</p>

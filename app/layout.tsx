@@ -7,6 +7,10 @@ import Link from "next/link";
 import { IToken } from "@/types/interface/token";
 import store from "@/store/main";
 import { Provider } from "react-redux";
+import getQueryClient from "@/utils/getQueryClient";
+import { getSpotifyAccess } from "@/queryFns/getSpotifyAccess";
+import { dehydrate } from "@tanstack/react-query";
+import { ReactQueryHydrate } from "@/utils/ReactQueryHydrate";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +24,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(["token"], getSpotifyAccess);
+  const dehydratedState = dehydrate(queryClient);
   return (
     <html lang="en">
       <ReactQueryProvider>
@@ -32,7 +39,9 @@ export default async function RootLayout({
               </Link>
             </nav>
 
-            {children}
+            <ReactQueryHydrate state={dehydratedState}>
+              {children}
+            </ReactQueryHydrate>
           </body>
         </ReduxProvider>
       </ReactQueryProvider>
