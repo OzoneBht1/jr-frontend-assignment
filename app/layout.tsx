@@ -11,6 +11,7 @@ import getQueryClient from "@/utils/getQueryClient";
 import { getSpotifyAccess } from "@/queryFns/getSpotifyAccess";
 import { dehydrate } from "@tanstack/react-query";
 import { ReactQueryHydrate } from "@/utils/ReactQueryHydrate";
+import SearchBar from "@/components/SearchBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,10 +34,13 @@ export default async function RootLayout({
         <ReduxProvider>
           <body className={inter.className}>
             <nav className="sticky h-20 z-30 bg-white flex items-center justify-between top-0 left-0 px-5 shadow-md">
-              <Image src="/logo.svg" alt="logo" width={130} height={100} />
-              <Link className="text-yellow-700 font-bold" href="/search">
-                Search
+              <Link href="/">
+                <Image src="/logo.svg" alt="logo" width={130} height={100} />
               </Link>
+              {/* <Link className="text-yellow-700 font-bold" href="/search"> */}
+              <SearchBar />
+              {/* Search */}
+              {/* </Link> */}
             </nav>
 
             <ReactQueryHydrate state={dehydratedState}>
