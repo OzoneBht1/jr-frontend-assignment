@@ -2,11 +2,8 @@ export const getSpotifyAccess = async () => {
   try {
     const params = new URLSearchParams();
     params.append("grant_type", "client_credentials");
-    params.append("client_id", process.env.NEXT_PUBLIC_CLIENT_ID as string);
-    params.append(
-      "client_secret",
-      process.env.NEXT_PUBLIC_CLIENT_SECRET as string
-    );
+    params.append("client_id", process.env.CLIENT_ID as string);
+    params.append("client_secret", process.env.CLIENT_SECRET as string);
 
     const response = await fetch(
       `https://accounts.spotify.com/api/token?${params.toString()}`,
