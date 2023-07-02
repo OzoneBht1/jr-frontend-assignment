@@ -3,18 +3,18 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { getSearchedResults } from "@/queryFns/getSearchedResults";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useAppSelector } from "@/store/hooks";
 import { ISearchResults } from "@/types/interface/searchResults";
 import { useRouter } from "next/navigation";
-import { AiOutlineSearch, AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
   const { access_token } = useAppSelector((state) => state.spotify);
   const inputRef = useRef<any>(null);
 
-  const { data, isLoading, refetch, remove } = useQuery<ISearchResults>(
+  const { data, refetch } = useQuery<ISearchResults>(
     ["search-preview"],
     () => getSearchedResults(access_token as string, query, "6"),
     {

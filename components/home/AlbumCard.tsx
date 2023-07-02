@@ -1,4 +1,4 @@
-import { IAlbum, IItem, ITrack } from "@/types/interface/trendingSongs";
+import { IItem } from "@/types/interface/trendingSongs";
 import Image from "next/image";
 import Link from "next/link";
 

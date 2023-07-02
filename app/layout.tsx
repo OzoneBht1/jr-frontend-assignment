@@ -4,9 +4,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { IToken } from "@/types/interface/token";
-import store from "@/store/index";
-import { Provider } from "react-redux";
 import getQueryClient from "@/utils/getQueryClient";
 import { getSpotifyAccess } from "@/queryFns/getSpotifyAccess";
 import { dehydrate } from "@tanstack/react-query";
@@ -37,10 +34,7 @@ export default async function RootLayout({
               <Link href="/">
                 <Image src="/logo.svg" alt="logo" width={130} height={100} />
               </Link>
-              {/* <Link className="text-yellow-700 font-bold" href="/search"> */}
               <SearchBar />
-              {/* Search */}
-              {/* </Link> */}
             </nav>
 
             <ReactQueryHydrate state={dehydratedState}>

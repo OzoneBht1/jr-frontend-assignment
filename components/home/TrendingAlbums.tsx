@@ -1,14 +1,10 @@
 "use client";
 
-import { getSpotifyAccess } from "@/queryFns/getSpotifyAccess";
 import { getTrendingAlbums } from "@/queryFns/getTrendingAlbums";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { spotifyActions } from "@/store/reducers/spotifyReducer";
-import { IToken } from "@/types/interface/token";
-import { IAlbum, ITrending } from "@/types/interface/trendingSongs";
+import { useAppSelector } from "@/store/hooks";
+import { ITrending } from "@/types/interface/trendingSongs";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import AlbumCard from "./AlbumCard";
 
 export default function TrendingAlbums() {
@@ -37,10 +33,6 @@ export default function TrendingAlbums() {
   if (!trendingTracks) {
     return <div>no data</div>;
   }
-
-  const albumClickHandler = (id: string) => {
-    router.push(`/${id}`);
-  };
 
   return (
     <div className="flex flex-col p-10 gap-10 ml-5 mt-10 items-center">

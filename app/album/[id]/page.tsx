@@ -4,14 +4,11 @@ import { getAlbum } from "@/queryFns/getAlbum";
 import { useAppSelector } from "@/store/hooks";
 import { IAlbum } from "@/types/interface/trendingSongs";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Badge from "@/components/UI/Badge";
 import { convertMsToMinsSecs } from "@/utils/timeUtils";
-import { FiPlayCircle } from "react-icons/fi";
 
 export default function Details({ params }: { params: any }) {
-  const router = useRouter();
   console.log(params.id);
 
   if (!params.id) {
@@ -19,7 +16,11 @@ export default function Details({ params }: { params: any }) {
   }
   const { access_token } = useAppSelector((state) => state.spotify);
 
-  const { data: album, isError: albumIsError } = useQuery<IAlbum>({
+  const {
+    data: album,
+    isLoading: albumIsLoading,
+    isError: albumIsError,
+  } = useQuery<IAlbum>({
     queryKey: ["trendingAlbums"],
     queryFn: () => getAlbum(access_token, params.id),
     enabled: Boolean(access_token) && Boolean(params.id),
@@ -27,6 +28,10 @@ export default function Details({ params }: { params: any }) {
       console.log(data);
     },
   });
+
+  if (albumIsLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (albumIsError) {
     throw new Error("The page you are looking for does not exist");
@@ -95,7 +100,7 @@ export default function Details({ params }: { params: any }) {
         </div>
       </div>
 
-      <div className="flex justify-center mt-20">
+      <div className="flex justify-center mt-24">
         <div className="flex w-4/5 justify-center border-2 border-black">
           <table className="table-fixed w-full">
             <thead className="bg-slate-400">
@@ -107,7 +112,7 @@ export default function Details({ params }: { params: any }) {
               </tr>
             </thead>
             <tbody>
-              {album?.tracks?.items?.map((track) => (
+              {album?.tracks?.items?.map((track: any) => (
                 <tr className="border-b-2 border-slate-200" key={track.id}>
                   <td align="left">{track.name}</td>
                   <td align="center">
@@ -116,11 +121,13 @@ export default function Details({ params }: { params: any }) {
                   </td>
                   <td align="center">{track?.explicit ? "Yes" : "No"}</td>
                   <td align="center">
-                    {track.preview_url && (
+                    {track.preview_url ? (
                       <audio controls className="w-3/4 py-2">
                         <source src={track.preview_url} type="audio/mpeg" />
                         Your browser does not support the audio element.
                       </audio>
+                    ) : (
+                      <p>N/A</p>
                     )}{" "}
                   </td>
                 </tr>

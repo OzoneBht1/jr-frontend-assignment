@@ -17,7 +17,7 @@ export default function SearchedResults({
   const { access_token } = useAppSelector((state) => state.spotify);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data } = useQuery<ISearchResults>(
+  const { data, isLoading } = useQuery<ISearchResults>(
     ["search", currentPage],
     () =>
       getSearchedResults(
@@ -31,6 +31,11 @@ export default function SearchedResults({
       enabled: Boolean(params.query) && Boolean(access_token),
     }
   );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   if (!data) {
     return <div>no data</div>;
   }
@@ -53,13 +58,16 @@ export default function SearchedResults({
     <div className="flex w-full justify-center items-center pt-5">
       <div className="flex flex-col justify-center items-start w-3/5 gap-6">
         <h6 className="font-semibold text-lg md:text-3xl">
-          Showing results for "{params.query}"
+          Showing results for &quot;
+          {params.query}
+          &quot;
         </h6>
         <div className="flex flex-col gap-5 justify-center items-center w-full">
           {data?.albums?.items.length === 0 && (
             <div className="flex flex-col justify-center items-center w-full border border-slate-500 p-3">
               <h6 className="font-semibold text-md md:text-3xl">
-                No results for "{params.query}"
+                No results for &quot;
+                {params.query}&quot;
               </h6>
               <p className="text-sm md:text-lg">
                 Try searching for something else

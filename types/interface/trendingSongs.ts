@@ -16,6 +16,7 @@ export interface ITrack {
   popularity: number;
   album: IAlbum;
   artists: IArtist[];
+  items?: any[];
 }
 export interface IAlbum {
   album_type: string;
@@ -26,7 +27,7 @@ export interface IAlbum {
   total_tracks?: number;
   release_date?: string;
   popularity?: number;
-  tracks?: ITrack[];
+  tracks?: ITrack[] | any;
   label?: string;
 }
 

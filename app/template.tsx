@@ -1,7 +1,7 @@
 "use client";
 
 import { getSpotifyAccess } from "@/queryFns/getSpotifyAccess";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import { spotifyActions } from "@/store/reducers/spotifyReducer";
 import { IToken } from "@/types/interface/token";
 import { useQuery } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       dispatch(spotifyActions.setToken(data));
     },
     onError: (error) => {
-      console.log("error");
+      console.log(error);
     },
   });
 
