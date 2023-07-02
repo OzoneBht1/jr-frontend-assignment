@@ -27,6 +27,7 @@ export interface IAlbum {
   release_date?: string;
   popularity?: number;
   tracks?: ITrack[];
+  label?: string;
 }
 
 export interface IImage {

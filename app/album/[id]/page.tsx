@@ -42,19 +42,7 @@ export default function Details({ params }: { params: any }) {
               </Badge>
             </div>
             <p className="text-md">
-              Artist(s) Name:{" "}
-              {album && album.artists && album.artists?.length > 1 ? (
-                album.artists.map((artist, index) => (
-                  <span key={index} className="text-lg">
-                    {artist.name}
-                    {index !== album?.artists!.length - 1 && ", "}k
-                  </span>
-                ))
-              ) : (
-                <span className="text-lg">
-                  {album && album.artists && album?.artists[0].name}
-                </span>
-              )}
+              Artist(s): {album && album.artists && album?.artists[0]?.name}
             </p>
 
             <p className="text-md">
@@ -90,9 +78,13 @@ export default function Details({ params }: { params: any }) {
           />
         </div>
       </div>
-      {album?.tracks?.items?.map((track) => {
-        return <div className="flex justify-center">{track.name}</div>;
-      })}
+      {/* {album?.tracks?.items?.map((track) => { */}
+      {/*   return ( */}
+      {/*     <div key={track.id} className="flex justify-center"> */}
+      {/*       {track.name} */}
+      {/*     </div> */}
+      {/*   ); */}
+      {/* })} */}
     </>
   );
 }

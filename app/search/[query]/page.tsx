@@ -57,7 +57,7 @@ export default function SearchedResults({
         </h6>
         <div className="flex flex-col gap-5 justify-center items-center w-full">
           {data?.albums?.items?.map((item) => {
-            return <SearchedAlbumCard item={item} />;
+            return <SearchedAlbumCard key={item.id} item={item} />;
           })}
           <div className="flex items-center gap-2">
             <AiOutlineLeftCircle

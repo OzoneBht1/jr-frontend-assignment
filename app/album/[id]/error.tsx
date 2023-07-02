@@ -4,9 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const error = ({ error, reset }: { error: Error; reset: () => void }) => {
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
   return (
     <div className="flex justify-center items-center h-[60vh]">
       <div className="max-w-md">

@@ -23,7 +23,7 @@ export default function AlbumCard({ item, idx }: IAlbumCardProps) {
           <p>{item.track.explicit && "explicit"}</p>
           <p>{item.track.album.name}</p>
           {item.track.artists.map((artist) => (
-            <p>{artist.name}</p>
+            <p key={artist.id}>{artist.name}</p>
           ))}
           <p>{item.track.album.album_type}</p>
           <p>{item.track.popularity}</p>

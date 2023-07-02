@@ -60,9 +60,9 @@ export default function SearchBar() {
                     Nothing found.
                   </div>
                 ) : (
-                  data?.albums.items?.map((album) => (
+                  data?.albums.items?.map((album, idx) => (
                     <Combobox.Option
-                      key={album.id}
+                      key={idx}
                       onClick={() => {
                         router.push(`/album/${album.id}`);
                         inputRef.current.blur();
