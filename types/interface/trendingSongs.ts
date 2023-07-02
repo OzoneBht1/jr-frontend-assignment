@@ -8,6 +8,7 @@ export interface IItem {
 }
 
 export interface ITrack {
+  id: string;
   added_at: string;
   name: string;
   duration_ms: string;
@@ -20,6 +21,12 @@ export interface IAlbum {
   album_type: string;
   images: IImage[];
   name: string;
+  id: string;
+  artists?: IArtist[];
+  total_tracks?: number;
+  release_date?: string;
+  popularity?: number;
+  tracks?: ITrack[];
 }
 
 export interface IImage {
