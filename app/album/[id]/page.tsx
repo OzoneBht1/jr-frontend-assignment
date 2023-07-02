@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Badge from "@/components/UI/Badge";
+import { convertMsToMinsSecs } from "@/utils/timeUtils";
+import { FiPlayCircle } from "react-icons/fi";
 
 export default function Details({ params }: { params: any }) {
   const router = useRouter();
@@ -32,15 +34,25 @@ export default function Details({ params }: { params: any }) {
 
   return (
     <>
-      <div className="flex justify-center h-96">
-        <div className="w-1/2 flex justify-center items-start">
-          <div className="flex flex-col gap-3">
+      <div className="flex text-sm justify-center h-96 mt-5">
+        <div className="flex w-1/2 justify-center items-start">
+          <div className="flex flex-col gap-3 w-2/5 h-full">
             <div className="flex items-center gap-3">
-              <p>Popularity:</p>
+              <p className="text-2xl">Popularity:</p>
               <Badge color="white" bgColor="blue-500" height={12} width={12}>
                 {album?.popularity}
               </Badge>
             </div>
+            <div className="flex flex-col w-full gap-2 border-b-2 border-slate-200">
+              <p className="text-4xl font-bold">{album?.name}</p>
+              <p className="text-2xl">
+                by{" "}
+                <span className="text-blue-500 font-semibold text-3xl">
+                  {album && album.artists && album?.artists[0]?.name}
+                </span>
+              </p>
+            </div>
+
             <p className="text-md">
               Artist(s): {album && album.artists && album?.artists[0]?.name}
             </p>
@@ -67,7 +79,7 @@ export default function Details({ params }: { params: any }) {
             </p>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="w-2/5 md:w-1/2 h-3/5 sm:h-4/5 sm:w-2/5 md:h-full">
           <Image
             loader={({ src }) => src}
             src={
@@ -82,13 +94,41 @@ export default function Details({ params }: { params: any }) {
           />
         </div>
       </div>
-      {/* {album?.tracks?.items?.map((track) => { */}
-      {/*   return ( */}
-      {/*     <div key={track.id} className="flex justify-center"> */}
-      {/*       {track.name} */}
-      {/*     </div> */}
-      {/*   ); */}
-      {/* })} */}
+
+      <div className="flex justify-center mt-20">
+        <div className="flex w-4/5 justify-center border-2 border-black">
+          <table className="table-fixed w-full">
+            <thead className="bg-slate-400">
+              <tr>
+                <th align="left">Track</th>
+                <th className="py-1">Duration</th>
+                <th>Explicit</th>
+                <th>Preview</th>
+              </tr>
+            </thead>
+            <tbody>
+              {album?.tracks?.items?.map((track) => (
+                <tr className="border-b-2 border-slate-200" key={track.id}>
+                  <td align="left">{track.name}</td>
+                  <td align="center">
+                    {track.duration_ms &&
+                      convertMsToMinsSecs(track.duration_ms)}
+                  </td>
+                  <td align="center">{track?.explicit ? "Yes" : "No"}</td>
+                  <td align="center">
+                    {track.preview_url && (
+                      <audio controls className="w-3/4 py-2">
+                        <source src={track.preview_url} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                      </audio>
+                    )}{" "}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 }
