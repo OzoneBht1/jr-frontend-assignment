@@ -43,7 +43,7 @@ export default function TrendingAlbums() {
   };
 
   return (
-    <div className="flex flex-col p-10 gap-10 mt-10">
+    <div className="flex flex-col p-10 gap-10 ml-5 mt-10 items-center">
       <h6 className="text-4xl font-bold">Trending Albums</h6>
       <div className="flex flex-wrap gap-6 justify-center">
         {trendingTracks?.items?.map((item) => {

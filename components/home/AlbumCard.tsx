@@ -7,6 +7,7 @@ interface IAlbumCardProps {
   idx: string;
 }
 export default function AlbumCard({ item, idx }: IAlbumCardProps) {
+  console.log(item);
   return (
     <Link href="/album/[id]" as={`/album/${idx}`}>
       <div className="flex flex-col h-96 w-50 relative group hover:opacity-80">
@@ -18,15 +19,26 @@ export default function AlbumCard({ item, idx }: IAlbumCardProps) {
           width={64}
           height={64}
         />
-        <div className=" transition-all transform translate-y-8 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 absolute left-0 bottom-0 bg-white w-full hidden group-hover:block">
+        <div className="text-white text-lg font-bold transition-all z-10 transform translate-y-8 opacity-0 group-hover:opacity-100 group-hover:backdrop-filter group-hover:backdrop-blur-lg group-hover:translate-y-0 absolute left-0 bottom-0 w-full invisible group-hover:visible">
           {" "}
-          <p>{item.track.explicit && "explicit"}</p>
-          <p>{item.track.album.name}</p>
-          {item.track.artists.map((artist) => (
-            <p key={artist.id}>{artist.name}</p>
-          ))}
-          <p>{item.track.album.album_type}</p>
-          <p>{item.track.popularity}</p>
+          <p className="">Album : {item.track.album.name}</p>
+          <p className="">
+            Artist(s):{" "}
+            {item.track.artists.length > 1
+              ? item.track.artists.map((artist, index) => (
+                  <span key={index} className="text-lg">
+                    {artist.name}
+                    {index !== item.track.artists.length - 1 && ", "}
+                  </span>
+                ))
+              : item.track.artists.map((artist) => (
+                  <span key={artist.id} className="text-lg">
+                    {artist.name}
+                  </span>
+                ))}
+          </p>
+          <p>Album Type : {item.track.album.album_type}</p>
+          <p>Total Tracks : {item.track.album.total_tracks}</p>
         </div>
       </div>
     </Link>
