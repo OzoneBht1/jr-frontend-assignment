@@ -38,12 +38,24 @@ export default function TrendingAlbums() {
     return <div>no data</div>;
   }
 
+  const albumClickHandler = (id: string) => {
+    router.push(`/${id}`);
+  };
+
   return (
-    <div className="flex p-10">
+    <div className="flex flex-col p-10 gap-10 mt-10">
       <h6 className="text-4xl font-bold">Trending Albums</h6>
-      {trendingTracks.items.map((item) => {
-        return <AlbumCard item={item} />;
-      })}
+      <div className="flex flex-wrap gap-6 justify-center">
+        {trendingTracks?.items?.map((item) => {
+          return (
+            <AlbumCard
+              key={item.track.id}
+              item={item}
+              idx={item.track.album.id}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
